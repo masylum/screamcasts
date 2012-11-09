@@ -1,0 +1,19 @@
+{
+  "name": "nko3-dickinabox",
+  "version": "0.0.0",
+  "description": "dickinabox",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nko3/dickinabox.git"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "subdomain": "dickinabox.nko3"
+}
