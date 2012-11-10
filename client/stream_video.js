@@ -30,16 +30,28 @@ $(function () {
         , data
         , pixels, color_table, reduced;
 
+      // 0-1 ms
       ctx.drawImage(video, 80, 0, 480, 480, 0, 0, canvas.width, canvas.height);
-
       pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-      reduced = reduceColors(pixels, canvas.width, canvas.height, colors);
-      drawCanvasFromReducedImageData(reduced);
 
+      // 30-40 ms
+      reduced = reduceColors(pixels, canvas.width, canvas.height, colors);
+
+      // 0-1 ms
+      drawCanvasFromReducedImageData(reduced);
       color_table = Gif.mapColorTable(reduced.palette, colors);
+
+      // 15 ms
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
-      $.post('/capture', {data: HexBinConverter.hexToBase64(data)});
+
+      $.post('/capture', HexBinConverter.hexToBase64(data));
+
+      // 1 ms
+      if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
+        this.started = true; // prevent effects before video started
+        $(canvas).addVignette();
+      }
     }
   }
 
