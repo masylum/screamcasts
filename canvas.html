@@ -30,18 +30,25 @@
             var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
             var pixels = theImage.data;
             var data = Gif.encode(pixels, 50, 50, 4).join('');
-            var img = document.getElementById('test1');
-            console.log(HexBinConverter.hexToBase64(data));
-            img.src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
+            document.getElementById('test').src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
+            document.getElementById('hex').innerHTML = data;
+            document.getElementById('base64').innerHTML = HexBinConverter.hexToBase64(data);
           //}, 5000);
         }
       }
     </script>
   </head>
   <body onload="draw();">
+    <h2>Le canvas</h2>
     <canvas id="tutorial" width="50" height="50"></canvas>
-    <img id='test1' src='' />
-    <img id='test2' src='' />
+    <h2>Le image</h2>
+    <img id='test' src='' />
+
+    <h2>Le hex</h2>
+    <div id='hex'></div>
+
+    <h2>Le base64</h2>
+    <div id='base64'></div>
   </body>
 </html>
 
