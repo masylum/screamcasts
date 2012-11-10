@@ -1,84 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canvas tutorial</title>
+    <title>Screamcast biatch!</title>
     <script type="text/javascript" src="vendor/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="vendor/underscore.js"></script>
-
-    <script type="text/javascript" src="client/gif.js"></script>
+    <script type="text/javascript" src="shared/gif.js"></script>
     <script type="text/javascript" src="client/reduce_color.js"></script>
     <script type="text/javascript" src="client/hexbase64.js"></script>
     <script type="text/javascript" src="client/quantize.js"></script>
-
     <script type="text/javascript" src="client/stream_video.js"></script>
-
-    <script type="text/javascript">
-      /**
-       * Display error. This should go to the UI
-       */
-      function error(msg) {
-        console.log("Error: " + msg);
-      }
-
-      function draw(){
-        var canvas = document.getElementById('tutorial')
-          , size = 100
-          , colors = 16;
-
-        if (canvas.getContext){
-          document.getElementById('tutorial').width = size;
-          document.getElementById('tutorial').height = size;
-          var ctx = canvas.getContext('2d');
-          ctx.imageSmoothingEnabled = false;
-
-          function getColors() {
-            return _.map(_.range(3), function () {
-              return Math.floor(Math.random() * 255);
-            }).join(',');
-          }
-
-          function drawRandomColors() {
-            var stripes = 10
-              , strip_size = size / stripes;
-
-            _.times(stripes, function (n) {
-              ctx.fillStyle = "rgb(" + getColors() + ")";
-              ctx.fillRect (n * strip_size, 0, strip_size, size);
-            });
-          }
-
-          //setInterval(function () {
-            drawRandomColors();
-            var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            var pixels = theImage.data;
-            var reduced = reduceToColors(pixels, size, size, colors);
-            var color_table = Gif.mapColorTable(reduced.palette, colors);
-            var data = Gif.encode(size, size, colors);
-            data = data.concat(Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors));
-            data = data.join('');
-            document.getElementById('test').src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
-            document.getElementById('base64').value = HexBinConverter.hexToBase64(data);
-
-            // Here's an extracted version of how an image is reduced to 256 colors
-            drawCanvasFromReducedImageData(reduced);
-
-          //}, 1000);
-        }
-      }
-    </script>
   </head>
-  <body onload="draw();">
+  <body>
     <h2>Le canvas</h2>
     <canvas id="tutorial"></canvas>
     <canvas id="reduced_image"></canvas>
-    <h2>Le image</h2>
-    <img id='test' src='' />
-
-    <h2>Le form</h2>
-    <form action='http://localhost:3000/capture?window_id=1' method='post'>
-      <textarea id='base64' cols='200' rows='5' name='data'></textarea>
-      <input type='submit' />
-    </form>
   </body>
 </html>
 

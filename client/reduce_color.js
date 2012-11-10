@@ -2,7 +2,7 @@
  * Take an array of pixels and return an approximation of it
  * with 256 colors, returning a palette and the mapped pixels
  */
-function reduceToColors(pixels, width, height, colors) {
+function reduceColors(pixels, width, height, colors) {
   // Generate RGB pixels, skipping the alpha channel
   var rgbPixels = []
     , i
@@ -61,4 +61,3 @@ function drawCanvasFromReducedImageData(data) {
   }
   ctx.putImageData(imageData, 0, 0);
 }
-
