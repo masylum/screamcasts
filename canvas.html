@@ -2,12 +2,24 @@
 <html>
   <head>
     <title>Canvas tutorial</title>
+    <script type="text/javascript" src="vendor/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="vendor/underscore.js"></script>
+
     <script type="text/javascript" src="client/gif.js"></script>
     <script type="text/javascript" src="client/reduce_color.js"></script>
     <script type="text/javascript" src="client/hexbase64.js"></script>
     <script type="text/javascript" src="client/quantize.js"></script>
+
+    <script type="text/javascript" src="client/stream_video.js"></script>
+
     <script type="text/javascript">
+      /**
+       * Display error. This should go to the UI
+       */
+      function error(msg) {
+        console.log("Error: " + msg);
+      }
+
       function draw(){
         var canvas = document.getElementById('tutorial')
           , size = 100
