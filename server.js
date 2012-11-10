@@ -17,6 +17,7 @@ http.createServer(function (req, res) {
     // not safe!
     read_stream = fs.createReadStream(__dirname + url.parse(req.url).pathname);
     read_stream.on('error', function () {
+      res.end('not found');
       console.log(__dirname + url.parse(req.url).pathname, ' not found: who cares?');
     });
     read_stream.pipe(res);
