@@ -46,6 +46,9 @@ $(function () {
       data = data.join('');
 
       $.post('/capture', HexBinConverter.hexToBase64(data));
+
+      // 1 ms
+      $(canvas).addVignette();
     }
   }
 
