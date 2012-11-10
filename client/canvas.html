@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas tutorial</title>
+    <script type="text/javascript" src="https://raw.github.com/hiddentao/lzw-async/master/lzw-async.min.js"></script>
+    <script type="text/javascript" src="client/underscore.js"></script>
+    <script type="text/javascript" src="client/gif_encoder.js"></script>
+    <script type="text/javascript" src="client/base64.js"></script>
+    <script type="text/javascript">
+      function draw(){
+        var canvas = document.getElementById('tutorial');
+
+        if (canvas.getContext){
+          // http://www.matthewflickinger.com/lab/whatsinagif/bits_and_bytes.asp
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = false;
+          ctx.fillStyle = "rgb(255,0,0)";
+          ctx.fillRect (0, 0, 5, 5);
+          ctx.fillRect (5, 5, 5, 5);
+          ctx.fillStyle = "rgb(0, 0, 255)";
+          ctx.fillRect (5, 0, 5, 5);
+          ctx.fillRect (0, 5, 5, 5);
+          ctx.fillStyle = "rgb(255, 255, 255)";
+          ctx.fillRect (3, 3, 4, 4);
+
+          var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          var pixels = theImage.data;
+          console.log(pixels);
+        }
+      }
+    </script>
+  </head>
+  <body onload="draw();">
+    <canvas id="tutorial" width="10" height="10"></canvas>
+    <img id='test' src='data:image/gif;base64,' />
+  </body>
+</html>
