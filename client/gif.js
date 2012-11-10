@@ -35,6 +35,9 @@
     return output;
   }
 
+  /**
+   * Encodes each frame
+   */
   Gif.addImage = function (pixels, sizes, colors) {
     var output = ['2c']
       , min_code_size = tableSize(colors)
@@ -52,6 +55,9 @@
     return output;
   };
 
+  /**
+   * Initializes headers for the GIF
+   */
   Gif.encode = function (width, height, colors) {
     var output = Gif.header;
     output = output.concat(logicalScreenDescriptor([width, height], colors));
