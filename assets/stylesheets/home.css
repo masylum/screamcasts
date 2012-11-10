@@ -2,6 +2,11 @@ body, html {
   padding: 0;
   margin: 0; }
 
+body {
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal; }
+
 .hero {
   overflow: hidden;
   height: 640px;
@@ -26,3 +31,26 @@ body, html {
     text-align: center; }
     .hero .hero-content .logo {
       margin: 112px 0 20px 0; }
+    .hero .hero-content h1 {
+      color: white;
+      font-size: 54px;
+      font-weight: 300;
+      font-stretch: normal; }
+    .hero .hero-content .button {
+      font-size: 24px;
+      margin: 0 3px;
+      line-height: 67px; }
+      .hero .hero-content .button.secondary {
+        font-size: 18px; }
+
+.button {
+  font-family: "Myriad Pro", sans-serif;
+  border-radius: 10px;
+  background: #5c7a7d;
+  font-weight: bold;
+  padding: 5px 40px 0;
+  display: inline-block;
+  color: white;
+  text-decoration: none; }
+  .button.primary {
+    background: #179eaa; }
