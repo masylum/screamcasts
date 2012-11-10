@@ -25,7 +25,8 @@
 
           var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
           var pixels = theImage.data;
-          console.log(pixels);
+          var data = Gif.analizeImage(pixels, 10, 10);
+          console.log(data);
         }
       }
     </script>
