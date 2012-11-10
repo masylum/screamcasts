@@ -48,7 +48,7 @@ $(function () {
       function success(stream) {
         video.src = window.webkitURL.createObjectURL(stream);
         video_stream = stream;
-        setInterval(sendFrame, 1000);
+        setInterval(sendFrame, 200);
       },
       function (e) {
         error("Couldn't get access to your webcam. Please grant permission. Please make sure you are not running this from your file system.");

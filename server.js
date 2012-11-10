@@ -10,6 +10,8 @@ http.createServer(function (req, res) {
 
   if (path === '/data.gif') {
     streamer.stream(req, res);
+  } else if (path === '/') {
+    read_stream = require('fs').createReadStream(__dirname + '/canvas.html');
   } else if (path === '/capture') {
     streamer.capture(req, res);
   } else {
