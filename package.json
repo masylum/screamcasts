@@ -1,6 +1,6 @@
 {
   "name": "nko3-dickinabox",
-  "version": "0.0.0",
+  "version": "0.0.0-2",
   "description": "dickinabox",
   "main": "server.js",
   "scripts": {
@@ -10,10 +10,12 @@
     "type": "git",
     "url": "git@github.com:nko3/dickinabox.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "engines": {
     "node": "0.8.x"
   },
-  "subdomain": "dickinabox.nko3"
+  "subdomain": "screamcasts",
+  "domains": [
+    "screamcasts.com"
+  ]
 }
