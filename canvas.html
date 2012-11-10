@@ -7,40 +7,50 @@
     <script type="text/javascript" src="client/hexbase64.js"></script>
     <script type="text/javascript">
       function draw(){
-        var canvas = document.getElementById('tutorial');
+        var canvas = document.getElementById('tutorial')
+          , size = 40
+          , colors = 8;
 
         if (canvas.getContext){
+          document.getElementById('tutorial').width = size;
+          document.getElementById('tutorial').height = size;
           var ctx = canvas.getContext('2d');
           ctx.imageSmoothingEnabled = false;
 
-          function randomHue() {
-            var hue = Math.floor(Math.random() * 255);
-            ctx.fillStyle = "rgb(" + hue + ",0,0)";
-            ctx.fillRect (0, 0, 25, 25);
-            ctx.fillRect (25, 25, 25, 25);
-            ctx.fillStyle = "rgb(0, 0, " + hue +")";
-            ctx.fillRect (25, 0, 25, 25);
-            ctx.fillRect (0, 25, 25, 25);
-            ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.fillRect (15, 15, 20, 20);
+          function getColors() {
+            return _.map(_.range(3), function () {
+              return Math.floor(Math.random() * 255);
+            }).join(',');
           }
 
-          //setInterval(function (){
-            randomHue();
+          function drawRandomColors() {
+            var stripes = 4
+              , strip_size = size / stripes;
+
+            _.times(stripes, function (n) {
+              ctx.fillStyle = "rgb(" + getColors() + ")";
+              ctx.fillRect (n * strip_size, 0, strip_size, size);
+            });
+          }
+
+          //setInterval(function () {
+            drawRandomColors();
             var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
             var pixels = theImage.data;
-            var data = Gif.encode(pixels, 50, 50, 4).join('');
+            var data = Gif.encode(size, size, colors);
+            data = data.concat(Gif.addImage(pixels, [size, size], colors));
+            data = data.join('');
             document.getElementById('test').src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
             document.getElementById('hex').innerHTML = data.match(/.{1,2}/g).join(' ');
             document.getElementById('base64').value = HexBinConverter.hexToBase64(data);
-          //}, 5000);
+          //}, 1000);
         }
       }
     </script>
   </head>
   <body onload="draw();">
     <h2>Le canvas</h2>
-    <canvas id="tutorial" width="50" height="50"></canvas>
+    <canvas id="tutorial"></canvas>
     <h2>Le image</h2>
     <img id='test' src='' />
 
@@ -48,7 +58,7 @@
     <div id='hex'></div>
 
     <h2>Le form</h2>
-    <form action='http://localhost:3000/capture' method='post'>
+    <form action='http://localhost:3000/capture?window_id=1' method='post'>
       <textarea id='base64' cols='200' rows='5' name='data'></textarea>
       <input type='submit' />
     </form>

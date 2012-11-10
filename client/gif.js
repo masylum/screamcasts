@@ -1,5 +1,5 @@
 (function () {
-  var global = this
+  var global = (window || module.exports)
     , Gif = {header: ['47', '49', '46', '38', '39', '61'], trailer: ['3B']};
 
   function bin2Hex(n) {
@@ -29,8 +29,9 @@
       , table_size = pad((tableSize(colors) - 1).toString(2), 3);
 
     output = output.concat(mapSizes(sizes));
-    output.push(bin2Hex('0' + table_size + '0' + table_size)); // TODO: unhardcode
+    output.push(bin2Hex('0' + table_size + '0000')); // TODO: unhardcode
     output = output.concat(['00', '00']);
+    console.log(output);
 
     return output;
   }
@@ -39,9 +40,10 @@
     var output = ['2c']
       , min_code_size = tableSize(colors)
       , table_size = min_code_size - 1
-      , image_data = Gif.analizeImage(pixels, sizes[0], sizes[1])
+      , image_data = Gif.analizeImage(pixels, sizes[0], sizes[1], colors)
       , lwz_result = Gif.lwz(image_data.index_stream, min_code_size);
 
+    console.log(min_code_size, table_size);
     output = output.concat(['00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('10000' + pad(table_size.toString(2), 3))); // TODO: unhardcode
@@ -52,13 +54,13 @@
     return output;
   };
 
-  Gif.encode = function (pixels, width, height, colors) {
+  Gif.encode = function (width, height, colors) {
     var output = Gif.header;
     output = output.concat(logicalScreenDescriptor([width, height], colors));
-    output = output.concat(Gif.addImage(pixels, [width, height], colors));
     return output;
   };
 
+  // Never used lol! we are streaming biatches!
   Gif.finish = function (output) {
     return output.concat(Gif.trailer);
   };
@@ -137,15 +139,11 @@
     return output;
   };
 
-  Gif.analizeImage = function analizeImage(pixels, width, height) {
+  Gif.analizeImage = function analizeImage(pixels, width, height, colors) {
     var index_stream = []
       , color_table = []
       , y = 0
       , x, rgb, inpos;
-
-    // this is needed somehow :/
-    color_table.push('0,0,0');
-    color_table.push('255,255,255');
 
     for (; y < height; y++) {
       inpos = y * width * 4; // 4 for 4 ints per pixel
@@ -164,13 +162,21 @@
       }
     }
 
+    color_table = _.compose(_.flatten, _.map)(color_table, function (colors) {
+      return _.map(colors.split(','), function (color) {
+        return pad(Number(color).toString(16), 2);
+      });
+    });
+
+    // fill the rest of the table
+    while (color_table.length / 3 < colors) {
+      color_table = color_table.concat(['ff', 'ff', 'ff']);
+    }
+    console.log(color_table, index_stream);
+
     return {
       index_stream: index_stream
-    , color_table: _.compose(_.flatten, _.map)(color_table, function (colors) {
-        return _.map(colors.split(','), function (color) {
-          return pad(Number(color).toString(16), 2);
-        });
-      })
+    , color_table: color_table
     };
   };
 
