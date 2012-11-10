@@ -14,7 +14,7 @@ function reduceTo256Colors(pixels, width, height) {
   }
 
   // Quantize: generate a 256 palette + color map approximation of rgbPixels
-  cmap = MMCQ.quantize(rgbPixels, 8);
+  cmap = MMCQ.quantize(rgbPixels, 16);
   new_pixels = rgbPixels.map(function (p) { 
     return cmap.map(p); 
   });
