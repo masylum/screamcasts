@@ -31,8 +31,8 @@
             var pixels = theImage.data;
             var data = Gif.encode(pixels, 50, 50, 4).join('');
             document.getElementById('test').src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
-            document.getElementById('hex').innerHTML = data;
-            document.getElementById('base64').innerHTML = HexBinConverter.hexToBase64(data);
+            document.getElementById('hex').innerHTML = data.match(/.{1,2}/g).join(' ');
+            document.getElementById('base64').value = HexBinConverter.hexToBase64(data);
           //}, 5000);
         }
       }
@@ -47,8 +47,11 @@
     <h2>Le hex</h2>
     <div id='hex'></div>
 
-    <h2>Le base64</h2>
-    <div id='base64'></div>
+    <h2>Le form</h2>
+    <form action='http://localhost:3000/capture' method='post'>
+      <textarea id='base64' cols='200' rows='5' name='data'></textarea>
+      <input type='submit' />
+    </form>
   </body>
 </html>
 
