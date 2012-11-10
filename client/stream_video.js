@@ -48,7 +48,10 @@ $(function () {
       $.post('/capture', HexBinConverter.hexToBase64(data));
 
       // 1 ms
-      $(canvas).addVignette();
+      if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
+        this.started = true; // prevent effects before video started
+        $(canvas).addVignette();
+      }
     }
   }
 
