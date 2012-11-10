@@ -69,11 +69,6 @@
     return output;
   };
 
-  // Never used lol! we are streaming biatches!
-  Gif.finish = function (output) {
-    return output.concat(Gif.trailer);
-  };
-
   Gif.lwz = function lwz(index_stream, min_code_size) {
     var clear_code = Math.pow(2,  min_code_size)
 

@@ -45,7 +45,7 @@ $(function () {
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
 
-      $.post('/capture', HexBinConverter.hexToBase64(data));
+      $.post('/capture', {data: HexBinConverter.hexToBase64(data)});
 
       // 1 ms
       if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
@@ -60,7 +60,7 @@ $(function () {
       function success(stream) {
         video.src = window.webkitURL.createObjectURL(stream);
         video_stream = stream;
-        setInterval(sendFrame, 200);
+        setInterval(sendFrame, 300);
       },
       function (e) {
         error("Couldn't get access to your webcam. Please grant permission. Please make sure you are not running this from your file system.");

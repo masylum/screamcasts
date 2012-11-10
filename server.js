@@ -1,7 +1,5 @@
 var streamer = require('./lib/streamer')
-  , server = require('./lib/server');
-
-var http = require('http')
+  , http = require('http')
   , url = require('url');
 
 http.createServer(function (req, res) {
