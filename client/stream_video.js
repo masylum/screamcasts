@@ -27,7 +27,7 @@ $(function () {
     if (video_stream) {
       var canvas = document.querySelector('#tutorial')
         , ctx = canvas.getContext('2d')
-        , data = []
+        , data
         , pixels, color_table, reduced;
 
       ctx.drawImage(video, 80, 0, 480, 480, 0, 0, canvas.width, canvas.height);
@@ -37,9 +37,9 @@ $(function () {
       drawCanvasFromReducedImageData(reduced);
 
       color_table = Gif.mapColorTable(reduced.palette, colors);
-      data = data.concat(Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors));
+      data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
-      $.post('/capture', HexBinConverter.hexToBase64(data));
+      $.post('/capture', {data: HexBinConverter.hexToBase64(data)});
     }
   }
 

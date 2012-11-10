@@ -51,7 +51,7 @@
     output.push(pad(min_code_size.toString(16), 2));
     output = output.concat(lwz_result);
 
-    
+    return output;
   };
 
   /**
