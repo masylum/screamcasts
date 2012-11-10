@@ -1,7 +1,4 @@
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(8000);
+var streamer = require('./lib/streamer')
+  , server = require('./lib/server');
 
-console.log('Server running at http://0.0.0.0:8000/');
+server.start(streamer, 3000);

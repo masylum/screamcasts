@@ -3,39 +3,46 @@
   <head>
     <title>Canvas tutorial</title>
     <script type="text/javascript" src="vendor/underscore.js"></script>
-    <script type="text/javascript" src="lib/gif.js"></script>
+    <script type="text/javascript" src="client/gif.js"></script>
+    <script type="text/javascript" src="client/hexbase64.js"></script>
     <script type="text/javascript">
-      var canvas = document.getElementById('tutorial');
+      function draw(){
+        var canvas = document.getElementById('tutorial');
 
-      if (canvas.getContext){
-        var ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = false;
+        if (canvas.getContext){
+          var ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = false;
 
-        function randomHue() {
-          var hue = Math.floor(Math.random() * 255);
-          ctx.fillStyle = "rgb(" + hue + ",0,0)";
-          ctx.fillRect (0, 0, 25, 25);
-          ctx.fillRect (25, 25, 25, 25);
-          ctx.fillStyle = "rgb(0, 0, " + hue +")";
-          ctx.fillRect (25, 0, 25, 25);
-          ctx.fillRect (0, 25, 25, 25);
-          ctx.fillStyle = "rgb(255, 255, 255)";
-          ctx.fillRect (15, 15, 20, 20);
+          function randomHue() {
+            var hue = Math.floor(Math.random() * 255);
+            ctx.fillStyle = "rgb(" + hue + ",0,0)";
+            ctx.fillRect (0, 0, 25, 25);
+            ctx.fillRect (25, 25, 25, 25);
+            ctx.fillStyle = "rgb(0, 0, " + hue +")";
+            ctx.fillRect (25, 0, 25, 25);
+            ctx.fillRect (0, 25, 25, 25);
+            ctx.fillStyle = "rgb(255, 255, 255)";
+            ctx.fillRect (15, 15, 20, 20);
+          }
+
+          //setInterval(function (){
+            randomHue();
+            var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var pixels = theImage.data;
+            var data = Gif.encode(pixels, 50, 50, 4).join('');
+            var img = document.getElementById('test1');
+            console.log(HexBinConverter.hexToBase64(data));
+            img.src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
+          //}, 5000);
         }
-
-        //setInterval(function (){
-          randomHue();
-          var theImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          var pixels = theImage.data;
-          var data = Gif.encode(pixels, 50, 50, 4).join('');
-          var img = document.getElementById('test1');
-          console.log(HexBinConverter.hexToBase64(data));
-          img.src = 'data:image/gif;base64,' + HexBinConverter.hexToBase64(data);
-        //}, 5000);
+      }
     </script>
   </head>
   <body onload="draw();">
-    <canvas id="tutorial" width="10" height="10"></canvas>
-    <img id='test' src='data:image/gif;base64,' />
+    <canvas id="tutorial" width="50" height="50"></canvas>
+    <img id='test1' src='' />
+    <img id='test2' src='' />
   </body>
 </html>
+
+
