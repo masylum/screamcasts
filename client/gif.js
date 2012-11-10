@@ -38,17 +38,16 @@
   /**
    * Encodes each frame
    */
-  Gif.addImage = function (pixels, sizes, colors) {
+  Gif.addImage = function (index_stream, color_table, sizes, colors) {
     var output = ['2c']
       , min_code_size = tableSize(colors)
       , table_size = min_code_size - 1
-      , image_data = Gif.analizeImage(pixels, sizes[0], sizes[1], colors)
-      , lwz_result = Gif.lwz(image_data.index_stream, min_code_size);
+      , lwz_result = Gif.lwz(index_stream, min_code_size);
 
     output = output.concat(['00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('10000' + pad(table_size.toString(2), 3))); // TODO: unhardcode
-    output = output.concat(image_data.color_table); // TODO: unhardcode
+    output = output.concat(color_table);
     output.push(pad(min_code_size.toString(16), 2));
     output = output.concat(lwz_result);
 
@@ -100,8 +99,17 @@
         if (sub_block[last].length === 8) {
           sub_block[last] = toHex(sub_block[last]);
           num_bytes++;
-          sub_block.push("");
-          last++;
+
+          if (num_bytes === 255) {
+            output.push('FF');
+            output = output.concat(sub_block.slice(0, 255));
+            num_bytes = 0;
+            sub_block = [""];
+            last = 0;
+          } else {
+            sub_block.push("");
+            last++;
+          }
         }
       }
     }
@@ -125,14 +133,6 @@
         new_code = findCode(index_buffer);
         push(new_code);
 
-        if (num_bytes === 255) {
-          output.push('FF');
-          output = output.concat(sub_block.slice(0, 255));
-          console.log(sub_block, output);
-          num_bytes = 0;
-          sub_block = [_.last(sub_block) || ""];
-        }
-
         if (top_code === Math.pow(2, code_size)) {
           code_size++;
         }
@@ -153,36 +153,13 @@
     output = output.concat(sub_block);
 
     output.push("00");
-    console.log(pad(sub_block.length.toString(16), 2), sub_block, output);
 
     return output;
   };
 
-  Gif.analizeImage = function analizeImage(pixels, width, height, colors) {
-    var index_stream = []
-      , color_table = []
-      , y = 0
-      , x, rgb, inpos;
-
-    for (; y < height; y++) {
-      inpos = y * width * 4; // 4 for 4 ints per pixel
-      x = 0;
-
-      for (; x < width; x++) {
-        rgb = [pixels[inpos++], pixels[inpos++], pixels[inpos++]].join(',');
-        inpos++; // alpha
-
-        if (!_.include(color_table, rgb)) {
-          index_stream.push(color_table.length);
-          color_table.push(rgb);
-        } else {
-          index_stream.push(_.indexOf(color_table, rgb));
-        }
-      }
-    }
-
+  Gif.mapColorTable = function (color_table, colors) {
     color_table = _.compose(_.flatten, _.map)(color_table, function (colors) {
-      return _.map(colors.split(','), function (color) {
+      return _.map(colors, function (color) {
         return pad(Number(color).toString(16), 2);
       });
     });
@@ -192,10 +169,7 @@
       color_table = color_table.concat(['ff', 'ff', 'ff']);
     }
 
-    return {
-      index_stream: index_stream
-    , color_table: color_table
-    };
+    return color_table;
   };
 
   // exports

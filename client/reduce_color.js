@@ -2,7 +2,7 @@
  * Take an array of pixels and return an approximation of it
  * with 256 colors, returning a palette and the mapped pixels
  */
-function reduceTo256Colors(pixels, width, height) {
+function reduceToColors(pixels, width, height, colors) {
   // Generate RGB pixels, skipping the alpha channel
   var rgbPixels = []
     , i
@@ -14,7 +14,7 @@ function reduceTo256Colors(pixels, width, height) {
   }
 
   // Quantize: generate a 256 palette + color map approximation of rgbPixels
-  cmap = MMCQ.quantize(rgbPixels, 8);
+  cmap = MMCQ.quantize(rgbPixels, colors + 1);
   new_pixels = rgbPixels.map(function (p) { 
     return cmap.map(p); 
   });

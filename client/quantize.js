@@ -389,24 +389,24 @@ var MMCQ = (function() {
             console.log('wrong number of maxcolors');
             return false;
         }
-        
+
         // XXX: check color content and convert to grayscale if insufficient
-        
+
         var histo = getHisto(pixels),
             histosize = 1 << (3 * sigbits);
-        
+
         // check that we aren't below maxcolors already
         var nColors = 0;
         histo.forEach(function() { nColors++ });
         if (nColors <= maxcolors) {
             // XXX: generate the new colors from the histo and return
         }
-        
+
         // get the beginning vbox from the colors
         var vbox = vboxFromPixels(pixels, histo),
             pq = new PQueue(function(a,b) { return pv.naturalOrder(a.count(), b.count()) });
         pq.push(vbox);
-        
+
         // inner function to do the iteration
         function iter(lh, target) {
             var ncolors = 1,
@@ -423,7 +423,7 @@ var MMCQ = (function() {
                 var vboxes = medianCutApply(histo, vbox),
                     vbox1 = vboxes[0],
                     vbox2 = vboxes[1];
-                    
+
                 if (!vbox1) {
                     console.log("vbox1 not defined; shouldn't happen!");
                     return;
@@ -440,11 +440,11 @@ var MMCQ = (function() {
                 }
             }
         }
-        
+
         // first set of colors, sorted by population
         iter(pq, fractByPopulations * maxcolors);
         // console.log(pq.size(), pq.debug().length, pq.debug().slice());
-        
+
         // Re-sort by the product of pixel occupancy times the size in color space.
         var pq2 = new PQueue(function(a,b) { 
             return pv.naturalOrder(a.count()*a.volume(), b.count()*b.volume()) 
@@ -452,19 +452,19 @@ var MMCQ = (function() {
         while (pq.size()) {
             pq2.push(pq.pop());
         }
-        
+
         // next set - generate the median cuts using the (npix * vol) sorting.
         iter(pq2, maxcolors - pq2.size());
-        
+
         // calculate the actual colors
         var cmap = new CMap();
         while (pq2.size()) {
             cmap.push(pq2.pop());
         }
-        
+
         return cmap;
     }
-    
+
     return {
         quantize: quantize
     }
