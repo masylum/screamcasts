@@ -1,0 +1,28 @@
+body, html {
+  padding: 0;
+  margin: 0; }
+
+.hero {
+  overflow: hidden;
+  height: 640px;
+  background: #2a2727 url(../images/noise.png) repeat; }
+  .hero .gifs {
+    position: relative;
+    z-index: 1;
+    margin-top: -60px; }
+    .hero .gifs .bg-gif {
+      width: 160px;
+      height: 160px;
+      margin: 8px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px black; }
+  .hero .hero-content {
+    background: url(../images/hero-overlay.png) top left repeat-x;
+    width: 100%;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    height: 640px;
+    text-align: center; }
+    .hero .hero-content .logo {
+      margin: 112px 0 20px 0; }
