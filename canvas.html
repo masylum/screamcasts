@@ -8,8 +8,8 @@
     <script type="text/javascript">
       function draw(){
         var canvas = document.getElementById('tutorial')
-          , size = 40
-          , colors = 8;
+          , size = 100
+          , colors = 256;
 
         if (canvas.getContext){
           document.getElementById('tutorial').width = size;
@@ -24,7 +24,7 @@
           }
 
           function drawRandomColors() {
-            var stripes = 4
+            var stripes = 100
               , strip_size = size / stripes;
 
             _.times(stripes, function (n) {

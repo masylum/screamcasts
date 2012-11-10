@@ -31,7 +31,6 @@
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('0' + table_size + '0000')); // TODO: unhardcode
     output = output.concat(['00', '00']);
-    console.log(output);
 
     return output;
   }
@@ -43,12 +42,11 @@
       , image_data = Gif.analizeImage(pixels, sizes[0], sizes[1], colors)
       , lwz_result = Gif.lwz(image_data.index_stream, min_code_size);
 
-    console.log(min_code_size, table_size);
     output = output.concat(['00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('10000' + pad(table_size.toString(2), 3))); // TODO: unhardcode
     output = output.concat(image_data.color_table); // TODO: unhardcode
-    output = output.concat([pad(min_code_size.toString(16), 2), pad(lwz_result.length.toString(16), 2)]);
+    output.push(pad(min_code_size.toString(16), 2));
     output = output.concat(lwz_result);
 
     return output;
@@ -74,7 +72,9 @@
 
       , index_buffer = []
       , code_table = {}
-      , output = [""];
+      , sub_block = [""]
+      , num_bytes = 0
+      , output = [];
 
     code_table = _.object(_.range(eoi_code + 1), _.range(eoi_code + 1));
 
@@ -83,21 +83,20 @@
     }
 
     function push(value) {
-      var i_code = pad(Number(value).toString(2), code_size)
-        , last = output.length - 1
-        , offset = output[last].length + code_size - 8;
+      var i_code = pad(Number(value).toString(2), code_size).split('')
+        , bit
+        , last = sub_block.length - 1;
 
-      // pack
-      if (offset === 0) {
-        output[last] = toHex(i_code + output[last]);
-        output.push("");
-      // split le byte!
-      } else if (offset > 0) {
-        output[last] = toHex(i_code.substr(offset, i_code.length) + output[last]);
-        output.push(i_code.substr(0, offset));
-      // append
-      } else {
-        output[last] = i_code + output[last];
+      while (i_code.length) {
+        bit = i_code.pop();
+        sub_block[last] = bit + sub_block[last];
+
+        if (sub_block[last].length === 8) {
+          sub_block[last] = toHex(sub_block[last]);
+          num_bytes++;
+          sub_block.push("");
+          last++;
+        }
       }
     }
 
@@ -120,6 +119,14 @@
         new_code = findCode(index_buffer);
         push(new_code);
 
+        if (num_bytes === 255) {
+          output.push('FF');
+          output = output.concat(sub_block.slice(0, 255));
+          console.log(sub_block, output);
+          num_bytes = 0;
+          sub_block = [_.last(sub_block) || ""];
+        }
+
         if (top_code === Math.pow(2, code_size)) {
           code_size++;
         }
@@ -128,13 +135,19 @@
 
         index_buffer = [k];
       }
-
     });
 
     push(findCode(index_buffer));
     push(String(eoi_code));
-    output[output.length - 1] = toHex(pad(_.last(output), 8));
+
+    // fill the rest with zeroes
+    sub_block[sub_block.length - 1] = toHex(pad(_.last(sub_block), 8));
+
+    output.push(pad(sub_block.length.toString(16), 2));
+    output = output.concat(sub_block);
+
     output.push("00");
+    console.log(pad(sub_block.length.toString(16), 2), sub_block, output);
 
     return output;
   };
@@ -172,7 +185,6 @@
     while (color_table.length / 3 < colors) {
       color_table = color_table.concat(['ff', 'ff', 'ff']);
     }
-    console.log(color_table, index_stream);
 
     return {
       index_stream: index_stream
