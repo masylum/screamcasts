@@ -36,12 +36,16 @@ body {
       font-size: 54px;
       font-weight: 300;
       font-stretch: normal; }
-    .hero .hero-content .button {
-      font-size: 24px;
-      margin: 0 3px;
-      line-height: 67px; }
-      .hero .hero-content .button.secondary {
-        font-size: 18px; }
+    .hero .hero-content .buttons {
+      padding: 30px 0;
+      background: rgba(0, 0, 0, 0.3); }
+      .hero .hero-content .buttons .button {
+        font-size: 24px;
+        margin: 0 3px;
+        line-height: 67px;
+        width: 186px; }
+        .hero .hero-content .buttons .button.secondary {
+          font-size: 18px; }
 
 .button {
   font-family: "Myriad Pro", sans-serif;
