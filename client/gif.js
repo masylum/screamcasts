@@ -36,6 +36,9 @@
     return output;
   }
 
+  /**
+   * Encodes each frame
+   */
   Gif.addImage = function (pixels, sizes, colors) {
     var output = ['2c']
       , min_code_size = tableSize(colors)
@@ -47,13 +50,17 @@
     output = output.concat(['00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('10000' + pad(table_size.toString(2), 3))); // TODO: unhardcode
-    output = output.concat(image_data.color_table); // TODO: unhardcode
+    // Encode palette
+    output = output.concat(image_data.color_table);
     output = output.concat([pad(min_code_size.toString(16), 2), pad(lwz_result.length.toString(16), 2)]);
     output = output.concat(lwz_result);
 
     return output;
   };
 
+  /**
+   * Initializes headers for the GIF
+   */
   Gif.encode = function (width, height, colors) {
     var output = Gif.header;
     output = output.concat(logicalScreenDescriptor([width, height], colors));
