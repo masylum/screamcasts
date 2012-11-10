@@ -4,10 +4,10 @@ $(function () {
   $('body').append('<video id="live_video" autoplay>');
   $('video').hide();
 
-  var video_stream;
+  var video = document.getElementById("live_video")
+    , video_stream;
 
   if (navigator.webkitGetUserMedia) {
-    video = document.getElementById("live_video");
     navigator.webkitGetUserMedia({ video: true, audio: true },
       function success(stream) {
         video.src = window.webkitURL.createObjectURL(stream);
@@ -26,7 +26,9 @@ $(function () {
     if (video_stream) {
       var canvas = document.querySelector('#tutorial');
       var ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0);
+      ctx.drawImage(video,
+          80, 0, 480, 480,
+          0, 0, canvas.width, canvas.height);
 
       var pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       reduced = reduceTo256Colors(pixels, canvas.width, canvas.height);
