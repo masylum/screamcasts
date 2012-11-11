@@ -39,7 +39,7 @@ app.get('/random', function (req, res) {
     , random_key = _.random(0, keys.length);
 
   if (keys.length) {
-    res.redirect('/endpoint/' + keys[random_key]);
+    res.redirect('/v/' + keys[random_key]);
   } else {
     // TODO: better
     res.writeHead(404);
@@ -52,7 +52,7 @@ app.post('/window/:id/capture', function (req, res) {
   streamer.capture(req, res);
 });
 
-// le random gif
+// le view gif
 app.get('/v/:id', function (req, res) {
   res.render('view.html');
 });
