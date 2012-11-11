@@ -10,4 +10,9 @@ $(function () {
     $(".gif-container").prepend($gif);
   }
 
+  if (navigator.userAgent.match(/Chrome/)) {
+    $(document.body).prepend("<p style='position: absolute; top: 5px; left: 25px; font-size: 10px; color: #999'>If you have problems loading this GIF, try any other browser. Chrome has an <a style='color:#aaa' href='http://code.google.com/p/chromium/issues/detail?id=147223'>unresolved bug with animated GIFs</a>.</p>")
+
+  }
+
 });
