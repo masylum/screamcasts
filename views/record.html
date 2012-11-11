@@ -14,6 +14,9 @@
     <script type="text/javascript" src="/javascripts/client/quantize.js"></script>
     <script type="text/javascript" src="/javascripts/client/stream_video.js"></script>
 
+    <script type="text/javascript" src="/javascripts/client/socket.io.js"></script>
+    <script type="text/javascript" src="/javascripts/client/chat.js"></script>
+
     <script type="text/javascript" src="/javascripts/view.js"></script>
 </head>
 <body>
@@ -32,5 +35,13 @@
     <h2 style="display: none">Share this link!</h2>
     <p id="window_url"></p>
   </div>
+
+  <div id="chat" style="display: none; position: absolute; bottom: 0; width: 100%; font-family: Monaco, Courier, Monospace;">
+    <div id="log" style="color: #999; display: block; height: 150px; overflow: auto; font-size: 12px; padding-left: 25px;">
+    </div>
+    <textarea style="font-family: Monaco, Courier, Monospace; color: #bbb; font-size: 12px; display: block; background: none; border: none; width: 100%; padding: 5px; padding-left: 25px;" placeholder="Chat with other viewers"></textarea>
+  </div>
+
+  <iframe style="position: absolute; top: 20px; right: 0; z-index: 100000" src="http://nodeknockout.com/iframe/dickinabox" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
 </body>
 </html>

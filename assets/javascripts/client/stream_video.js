@@ -38,6 +38,8 @@ $(function () {
 
   function error(msg) {
     console.log("Error: " + msg);
+    $("h1").text("Error");
+    $(".loading p").text(msg);
   }
 
   function sendFrame() {
@@ -84,6 +86,9 @@ $(function () {
       $('#window_url').html('<a target="_blank" href="' + link + '">' + link + '</a>');
       sendFrame();
       $(".loading").hide();
+
+      // Join chat
+      joinChat(window_id);
     },
     function (e) {
       error("Couldn't get access to your webcam. Please grant permission.");
