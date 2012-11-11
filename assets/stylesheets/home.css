@@ -1,12 +1,199 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 body, html {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  color: #5c7a7d;
+  font-size: 20px;
+  line-height: 37px;
+}
 
 body {
   font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
   font-weight: 300;
+  background: #c5d2d3;
   font-stretch: normal; }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  color: #172425;
+  text-rendering: optimizelegibility;
+}
+h1 {
+  font-size: 42px;
+  line-height: 74px;
+}
+h2 {
+  font-size: 36px;
+  line-height: 74px;
+}
+h3 {
+  font-size: 30px;
+  line-height: 74px;
+}
+h4,
+h5,
+h6 {
+  line-height: 37px;
+}
+h4 {
+  font-size: 24px;
+}
+h5 {
+  font-size: 18px;
+}
+h6 {
+  font-size: 18px;
+}
+ol,
+ul {
+  margin: 0 0 37px 37px;
+}
+ul {
+  list-style: disc;
+}
+ol {
+  list-style: decimal;
+}
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+blockquote {
+  margin: 0 0 37px 37px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+}
 .hero {
   overflow: hidden;
   height: 640px;
@@ -48,13 +235,95 @@ body {
           font-size: 18px; }
 
 .button {
-  font-family: "Myriad Pro", sans-serif;
   border-radius: 10px;
   background: #5c7a7d;
-  font-weight: bold;
-  padding: 5px 40px 0;
+  padding: 0 40px;
   display: inline-block;
   color: white;
   text-decoration: none; }
   .button.primary {
     background: #179eaa; }
+.button:hover {
+  background: #6e989c;
+}
+.button.primary:hover {
+  background: #2fc6d3;
+}
+.content {
+  width: 860px;
+  padding: 37px 20px;
+  margin: 0 auto;
+}
+.bg-secondary-color {
+  background: #d5dedf;
+}
+
+/*How*/
+.how {
+  background: transparent url('/images/drawing_arrows.png') no-repeat center 370px;
+}
+
+.how h2 {
+  margin-bottom: 37px;
+}
+
+.how h2 span {
+  color: #5c7a7d;
+}
+
+/*Drawings*/
+.drawing {
+  text-align: center;
+  margin-bottom: 74px;
+}
+
+.drawing span {
+  height: 37px;
+  display: inline-block;
+  background: rgba(255,255,255,.7);
+  border-radius: 18px;
+  padding: 0 30px;
+  margin-bottom: 18px;
+}
+
+.drawing > img {
+  display: block;
+  margin: 0 auto;
+}
+
+.webcam, .canvas, .quantize {
+  display: block;
+  width: 33.33%;
+  float: left;
+}
+
+.canvas {
+  margin-top: 37px;
+}
+
+.quantize {
+  margin-top: 74px;
+}
+
+.gifs {
+  margin-top: 222px;
+}
+
+.gifs span {
+  margin-top: 18px;
+}
+
+/*Who*/
+.who {
+  padding-bottom: 111px;
+}
+
+.who > img {
+  float: left;
+  margin-right: 20px;
+}
+
+/*Footer*/
+.footer {
+  clear: both;
+}
