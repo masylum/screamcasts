@@ -1,6 +1,6 @@
 {
   "name": "nko3-dickinabox",
-  "version": "0.0.0-4",
+  "version": "0.0.1",
   "description": "dickinabox",
   "main": "server.js",
   "scripts": {
@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git@github.com:nko3/dickinabox.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "2.5.9"
+  },
   "engines": {
     "node": "0.8.x"
   },

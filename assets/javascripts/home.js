@@ -14,7 +14,7 @@ $(function(){
     if (id!== last_id) {
       i++;
       last_id = id;
-      gifs += '<img class="bg-gif" src="/assets/images/home-' + id +'.gif"/>';
+      gifs += '<img class="bg-gif" src="/images/home-' + id +'.gif"/>';
     }
   }
 

@@ -1,29 +1,47 @@
 var streamer = require('./lib/streamer')
+  , express = require('express')
+  , app = express.createServer()
   , http = require('http')
   , url = require('url')
   , fs = require('fs');
 
-http.createServer(function (req, res) {
-  var path = url.parse(req.url).pathname
-    , window = path.match(/\/window\/(.*).gif/)
-    , read_stream;
+app.use(express.favicon())
+   .use(express.staticCache())
+   .use(express['static'](__dirname + '/assets'))
+   .use(express.bodyParser())
+   .use(app.router)
+   .use(express.errorHandler())
+   ;
 
-  if (window) {
-    streamer.stream(window[1], req, res);
-  } else if (path === '/') {
-    fs.createReadStream(__dirname + '/home.html').pipe(res);
-  } else if (path === '/view') {
-    fs.createReadStream(__dirname + '/view.html').pipe(res);
-  } else if (path === '/capture') {
-    streamer.capture(req, res);
-  } else {
-    // not safe!
-    // TODO: Add HTTP caching headers to images
-    read_stream = fs.createReadStream(__dirname + url.parse(req.url).pathname);
-    read_stream.on('error', function () {
-      res.end('not found');
-      console.log(__dirname + url.parse(req.url).pathname, ' not found: who cares?');
-    });
-    read_stream.pipe(res);
-  }
-}).listen(3000);
+app.set('view options', {layout: false});
+app.register('.html', {compile: function (str, _) {
+  return function (_) {
+    return str;
+  };
+}});
+
+app.listen(3000);
+
+// le home
+app.get('/', function (req, res) {
+  res.render('home.html');
+});
+
+// le webcam
+app.get('/view', function (req, res) {
+  res.render('view.html');
+});
+
+// le random gif
+app.get('/random', function (req, res) {
+});
+
+// le post
+app.post('/capture', function (req, res) {
+  streamer.capture(req, res);
+});
+
+// le streamed gif
+app.get('/window/:id.gif', function (req, res) {
+  streamer.stream(req.param('id'), req, res);
+});
