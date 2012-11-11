@@ -31,7 +31,7 @@ $(function (){
     $container.css({
       width: min - 30 + 'px',
       height: min + 'px',
-      paddingBottom: $("#window_box").height() + 30 + 'px'
+      paddingBottom: $(".bottom-box").height() + 30 + 'px'
     });
   }
 
