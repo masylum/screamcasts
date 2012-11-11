@@ -79,7 +79,9 @@ $(function () {
       video.src = window.webkitURL.createObjectURL(stream);
       video_stream = stream;
       window_id = randomId(6);
-      $('#window_url').html(document.location.host + '/' + window_id + '.gif');
+      $('.center-container h2').show();
+      var link = 'http://'+document.location.host + '/' + window_id + '.gif';
+      $('#window_url').html( '<a target="_blank" href="'+link+'">'+link+'</a>');
       setInterval(sendFrame, 50);
       $(".loading").hide();
     },

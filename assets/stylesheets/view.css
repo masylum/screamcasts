@@ -7,7 +7,10 @@ body, html {
 body {
   background: #2a2727 url(../images/noise.png) repeat;
   box-shadow: inset 0 0 200px black;
-  overflow: hidden; }
+  overflow: hidden;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal; }
 
 .bar {
   position: absolute;
@@ -35,10 +38,28 @@ body {
       bottom: 3%;
       height: 10%;
       right: 3%; }
+  .center-container h2 {
+    font-size: 18px;
+    color: #28afaa; }
+  .center-container p {
+    font-size: 12px;
+    color: #c5c5c5; }
+  .center-container .button {
+    float: right;
+    margin: 10px 0 10px;
+    line-height: 38px; }
 
-#window_url {
-  font-size: 12px;
-  font-family: sans-serif;
-  padding: 5px;
-  background: #FFC;
-}
+#window_url a {
+  color: #d2e0ad;
+  font-size: 16px;
+  text-decoration: none; }
+
+.button {
+  font-family: "Myriad Pro", sans-serif;
+  border-radius: 10px;
+  background: #179eaa;
+  font-weight: bold;
+  padding: 5px 20px 0;
+  display: inline-block;
+  color: white;
+  text-decoration: none; }
