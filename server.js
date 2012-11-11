@@ -25,7 +25,7 @@ function broadcast(m) {
  */
 app.use(express.favicon())
    .use(express.bodyParser())
-   //.use(express.staticCache())
+   .use(express.staticCache())
    .use(express['static'](__dirname + '/assets'))
    .use(app.router)
    .use(express.errorHandler({dumpExceptions: true}))
