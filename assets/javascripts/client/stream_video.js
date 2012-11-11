@@ -62,9 +62,7 @@ $(function () {
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
 
-      _.throttle(function () {
-        $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
-      }, 200);
+      $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
 
       // 1 ms
       if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
@@ -80,8 +78,8 @@ $(function () {
       video_stream = stream;
       window_id = randomId(6);
       $('.center-container h2').show();
-      var link = 'http://'+document.location.host + '/' + window_id + '.gif';
-      $('#window_url').html( '<a target="_blank" href="'+link+'">'+link+'</a>');
+      var link = 'http://' + document.location.host + '/' + window_id + '.gif';
+      $('#window_url').html('<a target="_blank" href="' + link + '">' + link + '</a>');
       setInterval(sendFrame, 50);
       $(".loading").hide();
       setTimeout(function () {
@@ -95,7 +93,9 @@ $(function () {
       // Activate controls to toggle between preview and video
       $(".controls a").click(function (e) {
         e.preventDefault();
-        if ($(e.target).is('.active')) return;
+        if ($(e.target).is('.active')) {
+          return;
+        }
 
         $(".controls a").toggleClass("active");
         $("canvas.gif, img.broadcasted-gif").toggle();

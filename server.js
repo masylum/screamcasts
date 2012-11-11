@@ -61,3 +61,7 @@ app.get('/v/:id', function (req, res) {
 app.get('/:id.gif', function (req, res) {
   streamer.stream(req.param('id'), req, res);
 });
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ' + err);
+});
