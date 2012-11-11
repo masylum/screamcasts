@@ -78,3 +78,44 @@ body {
   display: inline-block;
   color: white;
   text-decoration: none; }
+
+#chat {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#chat textarea {
+  font-family: Monaco, Courier, Monospace;
+  color: #bbb;
+  font-size: 12px;
+  display: block;
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 5px;
+  padding-left: 25px;
+}
+
+#log {
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  z-index: 99;
+  display: block;
+  height: 150px;
+  overflow: auto;
+  padding-left: 25px;
+}
+
+#log p {
+  margin: 10px 0px;
+  font-size: 34px;
+  color: white;
+  text-shadow: 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black, 0px 0px 6px black,0px 0px 6px black, 0px 0px 6px black;
+  font-family: impact;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}

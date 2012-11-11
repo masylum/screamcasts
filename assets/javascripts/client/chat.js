@@ -18,11 +18,16 @@ socket.on('connect', function () {
 
 // Receive message: add it to the log and scroll down
 socket.on('message', function (m) {
+  var $p = $("<p>").text(m.msg);
   // Avoid my own join message
   if ($("#log p").length === 0 && m.type === "join") {
     return;
   }
-  $("#log").append($("<p>").text(m.msg));
+
+  $("#log").append($p);
+  setTimeout(function () {
+    $p.fadeOut();
+  }, 3 * 1000);
   $("#log").scrollTop(10000000000);
 });
 
