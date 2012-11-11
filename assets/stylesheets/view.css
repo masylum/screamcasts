@@ -35,3 +35,10 @@ body {
       bottom: 3%;
       height: 10%;
       right: 3%; }
+
+#window_url {
+  font-size: 12px;
+  font-family: sans-serif;
+  padding: 5px;
+  background: #FFC;
+}

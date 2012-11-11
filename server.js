@@ -5,10 +5,11 @@ var streamer = require('./lib/streamer')
 
 http.createServer(function (req, res) {
   var path = url.parse(req.url).pathname
+    , window = path.match(/\/window\/(.*).gif/)
     , read_stream;
 
-  if (path === '/data.gif') {
-    streamer.stream(req, res);
+  if (window) {
+    streamer.stream(window[1], req, res);
   } else if (path === '/') {
     fs.createReadStream(__dirname + '/home.html').pipe(res);
   } else if (path === '/view') {

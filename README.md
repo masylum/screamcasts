@@ -21,14 +21,13 @@ The best thing to happen to the GIF since the GIF
 
 SCREAMCASTS allows you to do GIF-based video conferencing.
 
-
 Set up
 ------
 
 Clone the repository locally.
 
-Then start a webserver. You can't access the video API locally, so you'll need to set up a server:
+Then start a webserver.
 
-    python -m SimpleHTTPServer 1234
+    node server.js
 
-And open http://localhost:1234
+And open http://localhost:3000
