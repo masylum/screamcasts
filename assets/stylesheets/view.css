@@ -49,10 +49,25 @@ body {
     margin: 10px 0 10px;
     line-height: 38px; }
 
-#window_url a {
+#window_box {
+  background: rgba(100, 100, 100, 0.3);
+  display: none;
+  padding: 10px 20px;
+}
+
+#window_box span {
+  color: #d2e0ad;
+  display: inline-block;
+  width: 350px;
+}
+
+#window_box a {
   color: #d2e0ad;
   font-size: 16px;
-  text-decoration: none; }
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px;
+}
 
 .button {
   font-family: "Myriad Pro", sans-serif;

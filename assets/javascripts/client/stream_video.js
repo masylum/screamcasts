@@ -81,11 +81,17 @@ $(function () {
       video.src = window.webkitURL.createObjectURL(stream);
       video_stream = stream;
       window_id = randomId(6);
-      $('.center-container h2').show();
-      var link = 'http://' + document.location.host + '/' + window_id + '.gif';
-      $('#window_url').html('<a target="_blank" href="' + link + '">' + link + '</a>');
+
+      var link = 'http://' + document.location.host + '/v/' + window_id
+        , gif = 'http://' + document.location.host + '/' + window_id + '.gif';
+
+      $('#window_box').show();
+      $('#window_url').append('<a target="_blank" href="' + link + '">' + link + '</a>');
+      $('#window_gif_url').append('<a target="_blank" href="' + gif + '">' + gif + '</a>');
+
       sendFrame();
-      $(".loading").hide();
+
+      $(".loading, .bar").hide();
 
       // Join chat
       joinChat(window_id);

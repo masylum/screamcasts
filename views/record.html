@@ -27,18 +27,24 @@
         <h1>Starting up...</h1>
         <p>Please Allow permission to use your webcam.</p>
       </div>
+
+      <div id="window_box">
+        <div id="window_url">
+          <span>Share this link to start a chat (buggy in chrome)</span>
+        </div>
+        <div id="window_gif_url">
+          <span>Embed this GIF anywhere</span>
+        </div>
+      </div>
+
       <canvas id="tutorial" style='display:none;'></canvas>
       <canvas class="gif" id="reduced_image"></canvas>
       <img src="/images/logo.png" class="logo">
     </div>
-
-    <h2 style="display: none">Share this link!</h2>
-    <p id="window_url"></p>
   </div>
 
   <div id="chat" style="display: none; position: absolute; bottom: 0; width: 100%; font-family: Monaco, Courier, Monospace;">
-    <div id="log" style="color: #999; display: block; height: 150px; overflow: auto; font-size: 12px; padding-left: 25px;">
-    </div>
+    <div id="log" style="color: #999; display: block; height: 150px; overflow: auto; font-size: 12px; padding-left: 25px;"></div>
     <textarea style="font-family: Monaco, Courier, Monospace; color: #bbb; font-size: 12px; display: block; background: none; border: none; width: 100%; padding: 5px; padding-left: 25px;" placeholder="Chat with other viewers"></textarea>
   </div>
 
