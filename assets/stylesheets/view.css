@@ -94,7 +94,7 @@ body {
 
 #log {
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 100px;
   z-index: 99;
   display: block;
