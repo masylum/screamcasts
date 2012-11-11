@@ -10,7 +10,7 @@ app.use(express.favicon())
    .use(express['static'](__dirname + '/assets'))
    .use(express.bodyParser())
    .use(app.router)
-   .use(express.errorHandler())
+   .use(express.errorHandler({dumpExceptions: true}))
    ;
 
 app.set('view options', {layout: false});
@@ -34,6 +34,17 @@ app.get('/view', function (req, res) {
 
 // le random gif
 app.get('/random', function (req, res) {
+  var windows = require('./lib/windows')
+    , keys = Object.keys(windows.storage)
+    , random_key = _.random(0, keys.length);
+
+  if (keys.length) {
+    res.redirect('/endpoint/' + keys[random_key]);
+  } else {
+    // TODO: better
+    res.writeHead(404);
+    res.end('There are no windows open at this moment!');
+  }
 });
 
 // le post
