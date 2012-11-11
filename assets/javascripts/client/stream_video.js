@@ -58,7 +58,7 @@ $(function () {
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
 
-      $.post('/capture?window_id=' + window_id, {data: HexBinConverter.hexToBase64(data)});
+      $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
 
       // 1 ms
       if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
@@ -69,19 +69,17 @@ $(function () {
   }
 
   if (navigator.webkitGetUserMedia) {
-    navigator.webkitGetUserMedia({video: true, audio: true},
-      function success(stream) {
-        video.src = window.webkitURL.createObjectURL(stream);
-        video_stream = stream;
-        window_id = randomId(32);
-        $('#window_url').html(document.location.host + '/window/' + window_id + '.gif');
-        setInterval(sendFrame, 50);
-        $(".loading").hide();
-      },
-      function (e) {
-        error("Couldn't get access to your webcam. Please grant permission.");
-      }
-    );
+    navigator.webkitGetUserMedia({video: true, audio: true}, function success(stream) {
+      video.src = window.webkitURL.createObjectURL(stream);
+      video_stream = stream;
+      window_id = randomId(32);
+      $('#window_url').html(document.location.host + '/window/' + window_id + '.gif');
+      setInterval(sendFrame, 50);
+      $(".loading").hide();
+    },
+    function (e) {
+      error("Couldn't get access to your webcam. Please grant permission.");
+    });
   } else {
     error("This demo is bleeding edge, so your browser isn't supported. Please use the newest Chrome.");
   }

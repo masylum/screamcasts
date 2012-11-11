@@ -6,9 +6,9 @@ var streamer = require('./lib/streamer')
   , fs = require('fs');
 
 app.use(express.favicon())
+   .use(express.bodyParser())
    .use(express.staticCache())
    .use(express['static'](__dirname + '/assets'))
-   .use(express.bodyParser())
    .use(app.router)
    .use(express.errorHandler({dumpExceptions: true}))
    ;
@@ -47,8 +47,8 @@ app.get('/random', function (req, res) {
   }
 });
 
-// le post
-app.post('/capture', function (req, res) {
+// le window capture
+app.post('/window/:id/capture', function (req, res) {
   streamer.capture(req, res);
 });
 
