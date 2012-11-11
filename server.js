@@ -17,6 +17,7 @@ http.createServer(function (req, res) {
     streamer.capture(req, res);
   } else {
     // not safe!
+    // TODO: Add HTTP caching headers to images
     read_stream = fs.createReadStream(__dirname + url.parse(req.url).pathname);
     read_stream.on('error', function () {
       res.end('not found');
