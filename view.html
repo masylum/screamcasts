@@ -2,14 +2,28 @@
 <head>
   <title></title>
   <link rel="stylesheet" type="text/css" href="/assets/stylesheets/view.css">
-  <script type="text/javascript" src="/assets/javascripts/jquery.min.js"></script>
+
+    <title>Screamcast biatch!</title>
+    <script type="text/javascript" src="vendor/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="vendor/underscore.js"></script>
+
+    <script type="text/javascript" src="shared/gif.js"></script>
+
+    <script type="text/javascript" src="client/effects.js"></script>
+
+    <script type="text/javascript" src="client/reduce_color.js"></script>
+    <script type="text/javascript" src="client/hexbase64.js"></script>
+    <script type="text/javascript" src="client/quantize.js"></script>
+    <script type="text/javascript" src="client/stream_video.js"></script>
+
   <script type="text/javascript" src="/assets/javascripts/view.js"></script>
 </head>
 <body>
 
   <div class="center-container">
     <div class="gif-container">
-      <img src="/assets/images/sample.gif" class="gif">
+      <canvas id="tutorial" style='display:none;'></canvas>
+      <canvas class="gif" id="reduced_image"></canvas>
       <img src="/assets/images/logo.png" class="logo">
     </div>
   </div>

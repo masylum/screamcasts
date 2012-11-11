@@ -10,7 +10,9 @@ http.createServer(function (req, res) {
   if (path === '/data.gif') {
     streamer.stream(req, res);
   } else if (path === '/') {
-    fs.createReadStream(__dirname + '/canvas.html').pipe(res);
+    fs.createReadStream(__dirname + '/home.html').pipe(res);
+  } else if (path === '/view') {
+    fs.createReadStream(__dirname + '/view.html').pipe(res);
   } else if (path === '/capture') {
     streamer.capture(req, res);
   } else {
