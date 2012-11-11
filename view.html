@@ -21,9 +21,13 @@
 <body>
 
   <div class="center-container">
-    <div class="gif-container">
+    <div class="gif-container" style="position: relative">
       <canvas id="tutorial" style='display:none;'></canvas>
       <canvas class="gif" id="reduced_image"></canvas>
+      <div class="gif loading" style='position: absolute; top: 0; left: 0; right: 0; text-align: center; background-color: rgba(255,255,255, 0.2); font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; color: white;'>
+        <h1>Starting up...</h1>
+        <p>Please Allow permission to use your webcam.</p>
+      </div>
       <img src="/assets/images/logo.png" class="logo">
     </div>
     <div id='window_url'></div>
