@@ -59,17 +59,22 @@ body {
   bottom: 0;
   width: 100%;
   font-size: 12px;
-}
-
-#window_box span {
   color: #797979;
-  width: 350px;
 }
 
-#window_box a {
-  color: #d2e0ad;
-  text-decoration: none;
-  padding: 5px;
+#window_box input {
+  padding: 5px 10px;
+  background: rgba(100, 100, 100, 0.2);
+  color: white;
+  display: inline-block;
+  margin-top: 4px;
+  border-radius: 2px;
+  border: 0px;
+  width: 220px;
+}
+
+#window_box input:focus {
+  outline: none;
 }
 
 

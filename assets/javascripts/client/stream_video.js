@@ -86,8 +86,12 @@ $(function () {
         , gif = 'http://' + document.location.host + '/' + window_id + '.gif';
 
       $('#window_box').show();
-      $('#window_url').append('<a target="_blank" href="' + link + '">' + link + '</a>');
-      $('#window_gif_url').append('<a target="_blank" href="' + gif + '">' + gif + '</a>');
+      $('#window_url').append('<input onclick="this.select()" class"share_url" value="' + link + '" />');
+      $('#window_gif_url').append('<input onclick="this.select()" class"share_url" value="' + gif + '" />');
+      $('.share_url').on('click', function () {
+        console.log('click');
+        selectText($(this));
+      });
 
       sendFrame();
 
