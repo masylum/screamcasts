@@ -27,7 +27,7 @@ socket.on('message', function (m) {
   $("#log").append($p);
   setTimeout(function () {
     $p.fadeOut();
-  }, 3 * 1000);
+  }, 5 * 1000);
   $("#log").scrollTop(10000000000);
 });
 
