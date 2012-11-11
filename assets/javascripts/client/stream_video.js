@@ -76,6 +76,7 @@ $(function () {
         window_id = randomId(32);
         $('#window_url').html(document.location.host + '/window/' + window_id + '.gif');
         setInterval(sendFrame, 50);
+        $(".loading").hide();
       },
       function (e) {
         error("Couldn't get access to your webcam. Please grant permission.");
