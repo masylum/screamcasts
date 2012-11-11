@@ -387,6 +387,10 @@ blockquote {
   float: right;
 }
 
+.footer > img {
+  width: 100px;
+}
+
 .clear {
   clear: both;
 }
