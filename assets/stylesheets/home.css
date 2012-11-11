@@ -137,6 +137,11 @@ body {
   background: #c5d2d3;
   font-stretch: normal; }
 
+a {
+  color: #172425;
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3,
@@ -315,7 +320,11 @@ blockquote {
 
 /*Who*/
 .who {
-  padding-bottom: 111px;
+  padding-bottom: 74px;
+}
+
+.who p {
+  clear: both;
 }
 
 .who > img {
@@ -323,7 +332,59 @@ blockquote {
   margin-right: 20px;
 }
 
+.who .avatars {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 37px;
+}
+
+.who .avatars li {
+  float: left;
+  width: 25%;
+  margin: 0;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+  -webkit-filter: grayscale(1);
+}
+
+.who .avatars li a span {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.5);
+  color: white;
+  text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.who .avatars li:hover span {
+  display: block;
+}
+
+.who .avatars img {
+  width: 100%;
+}
+
+.who small {
+  font-size: 80%;
+}
+
 /*Footer*/
 .footer {
+  clear: both;
+  font-size: 80%;
+}
+
+.footer p {
+  float: right;
+}
+
+.clear {
   clear: both;
 }
