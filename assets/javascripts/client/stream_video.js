@@ -13,6 +13,10 @@ $(function () {
     , size = 100
     , colors = 16;
 
+  if (!canvas) {
+    return;
+  }
+
   if (canvas.getContext) {
     document.getElementById('tutorial').width = size;
     document.getElementById('tutorial').height = size;
@@ -73,8 +77,8 @@ $(function () {
       function success(stream) {
         video.src = window.webkitURL.createObjectURL(stream);
         video_stream = stream;
-        window_id = randomId(32);
-        $('#window_url').html(document.location.host + '/window/' + window_id + '.gif');
+        window_id = randomId(6);
+        $('#window_url').html(document.location.host + '/' + window_id + '.gif');
         setInterval(sendFrame, 50);
         $(".loading").hide();
       },

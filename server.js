@@ -28,8 +28,8 @@ app.get('/', function (req, res) {
 });
 
 // le webcam
-app.get('/view', function (req, res) {
-  res.render('view.html');
+app.get('/record', function (req, res) {
+  res.render('record.html');
 });
 
 // le random gif
@@ -52,7 +52,12 @@ app.post('/capture', function (req, res) {
   streamer.capture(req, res);
 });
 
+// le random gif
+app.get('/v/:id', function (req, res) {
+  res.render('view.html');
+});
+
 // le streamed gif
-app.get('/window/:id.gif', function (req, res) {
+app.get('/:id.gif', function (req, res) {
   streamer.stream(req.param('id'), req, res);
 });
