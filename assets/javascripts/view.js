@@ -29,8 +29,9 @@ $(function (){
         min = Math.min(h,w);
 
     $container.css({
-      width: min - 50 + 'px',
-      height: min + 'px'
+      width: min - 30 + 'px',
+      height: min + 'px',
+      paddingBottom: $("#window_box").height() + 30 + 'px'
     });
   }
 

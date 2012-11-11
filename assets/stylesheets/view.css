@@ -21,7 +21,7 @@ body {
 
 .center-container {
   box-sizing: border-box;
-  padding: 30px 30 80px;
+  padding: 30px;
   margin: auto; }
   .center-container .gif-container {
     position: relative;
@@ -31,7 +31,8 @@ body {
     .center-container .gif-container .gif {
       position: relative;
       z-index: 10;
-      height: 100%; }
+      height: 100%;
+      border-radius: 5%; }
     .center-container .gif-container .logo {
       z-index: 11;
       position: absolute;
@@ -50,34 +51,27 @@ body {
     line-height: 38px; }
 
 #window_box {
-  background: rgba(100, 100, 100, 0.3);
   display: none;
   padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
 }
 
 #window_box span {
-  color: #d2e0ad;
-  display: inline-block;
+  color: #797979;
   width: 350px;
 }
 
 #window_box a {
   color: #d2e0ad;
-  font-size: 16px;
   text-decoration: none;
-  display: inline-block;
   padding: 5px;
 }
 
-.button {
-  font-family: "Myriad Pro", sans-serif;
-  border-radius: 10px;
-  background: #179eaa;
-  font-weight: bold;
-  padding: 5px 20px 0;
-  display: inline-block;
-  color: white;
-  text-decoration: none; }
 
 #chat {
   display: none;
