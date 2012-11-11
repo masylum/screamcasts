@@ -47,8 +47,9 @@
     output = output.concat(['21', 'f9', '04']);
     output.push(pad(bin2Hex('00000100'), 2)); // TODO: unhardcode
     // TODO: unhardcode
-    // 20ms delay between frames to fix Chrome shite
-    output = output.concat(['14', '00', '00', '00']);
+    // 100ms delay between frames to fix Chrome shite
+    // we are sending a frame each 200ms
+    output = output.concat(['64', '00', '00', '00']);
 
     output = output.concat(['2c', '00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));

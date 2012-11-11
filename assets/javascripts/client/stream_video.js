@@ -62,7 +62,9 @@ $(function () {
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
 
-      $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
+      _.throttle(function () {
+        $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
+      }, 200);
 
       // 1 ms
       if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
