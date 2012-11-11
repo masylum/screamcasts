@@ -62,7 +62,9 @@ $(function () {
       data = Gif.addImage(reduced.mapped_pixels, color_table, [size, size], colors);
       data = data.join('');
 
-      $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)});
+      _.defer(function () {
+        $.post('/window/' + window_id + '/capture', {data: HexBinConverter.hexToBase64(data)}, sendFrame);
+      });
 
       // 1 ms
       if (this.started || (pixels[0] !== 0 && pixels[1] !== 0 && pixels[2] !== 0)) {
@@ -80,26 +82,8 @@ $(function () {
       $('.center-container h2').show();
       var link = 'http://' + document.location.host + '/' + window_id + '.gif';
       $('#window_url').html('<a target="_blank" href="' + link + '">' + link + '</a>');
-      setInterval(sendFrame, 50);
+      sendFrame();
       $(".loading").hide();
-      setTimeout(function () {
-        var $img = $("<img>")
-          .attr("src", link)
-          .addClass("gif broadcasted-gif").hide();
-        $(".gif-container").append($img);
-        $(".controls").show();
-      }, 500);
-
-      // Activate controls to toggle between preview and video
-      $(".controls a").click(function (e) {
-        e.preventDefault();
-        if ($(e.target).is('.active')) {
-          return;
-        }
-
-        $(".controls a").toggleClass("active");
-        $("canvas.gif, img.broadcasted-gif").toggle();
-      });
     },
     function (e) {
       error("Couldn't get access to your webcam. Please grant permission.");

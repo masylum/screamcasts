@@ -44,13 +44,6 @@
       , table_size = min_code_size - 1
       , lwz_result = Gif.lwz(index_stream, min_code_size);
 
-    output = output.concat(['21', 'f9', '04']);
-    output.push(pad(bin2Hex('00000100'), 2)); // TODO: unhardcode
-    // TODO: unhardcode
-    // 100ms delay between frames to fix Chrome shite
-    // we are sending a frame each 200ms
-    output = output.concat(['64', '00', '00', '00']);
-
     output = output.concat(['2c', '00', '00', '00', '00']); // TODO: unhardcode
     output = output.concat(mapSizes(sizes));
     output.push(bin2Hex('10000' + pad(table_size.toString(2), 3))); // TODO: unhardcode
