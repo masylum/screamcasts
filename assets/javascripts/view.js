@@ -24,15 +24,18 @@ $(function (){
   }
 
   function onResize () {
-    var h = $body.height(),
+    var h = $body.height() - $(".bottom-box").outerHeight(),
         w = $body.width(),
         min = Math.min(h,w);
 
     $container.css({
-      width: min - 30 + 'px',
-      height: min + 'px',
-      paddingBottom: $(".bottom-box").height() + 30 + 'px'
+      width: min + 'px',
+      height: min + 'px'
     });
+
+
+
+
   }
 
   $(window).on('resize', onResize);

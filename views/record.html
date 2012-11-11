@@ -20,10 +20,11 @@
     <script type="text/javascript" src="/javascripts/view.js"></script>
 </head>
 <body>
-  <div id="log"></div>
+  
   <div class="center-container">
     
     <div class="gif-container" style="position: relative">
+      <div id="log"></div>
       <div class="gif loading" style='position: absolute; top: 0; left: 0; right: 0; text-align: center; background-color: rgba(255,255,255, 0.2); font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; color: white;'>
         <h1>Starting up...</h1>
         <p>Please Allow permission to use your webcam.</p>
@@ -31,18 +32,21 @@
       <canvas id="tutorial" style='display:none;'></canvas>
       <canvas class="gif" id="reduced_image"></canvas>
       <img src="/images/logo.png" class="logo">
-      <div id="chat">
-        <textarea style="" placeholder="Chat with other viewers"></textarea>
-      </div>
+      
     </div>
 
   </div>
   <div id="window_box" class="bottom-box">
-      <div id="window_url">
-        Share this link to start a chat (buggy in chrome)
+      <div class="links">
+        <div id="window_url">
+          Share this link to start a chat (buggy in chrome)
+        </div>
+        <div id="window_gif_url">
+          Embed this GIF anywhere
+        </div>
       </div>
-      <div id="window_gif_url">
-        Embed this GIF anywhere
+      <div id="chat" style="width: 50%; right: 0;">
+        <textarea style="" placeholder="Chat with other viewers"></textarea>
       </div>
     </div>
   <iframe style="position: absolute; top: 20px; right: 0; z-index: 100000" src="http://nodeknockout.com/iframe/dickinabox" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
