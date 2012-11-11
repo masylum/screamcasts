@@ -84,6 +84,22 @@ $(function () {
       $('#window_url').html( '<a target="_blank" href="'+link+'">'+link+'</a>');
       setInterval(sendFrame, 50);
       $(".loading").hide();
+      setTimeout(function () {
+        var $img = $("<img>")
+          .attr("src", link)
+          .addClass("gif broadcasted-gif").hide();
+        $(".gif-container").append($img);
+        $(".controls").show();
+      }, 500);
+
+      // Activate controls to toggle between preview and video
+      $(".controls a").click(function (e) {
+        e.preventDefault();
+        if ($(e.target).is('.active')) return;
+
+        $(".controls a").toggleClass("active");
+        $("canvas.gif, img.broadcasted-gif").toggle();
+      });
     },
     function (e) {
       error("Couldn't get access to your webcam. Please grant permission.");
